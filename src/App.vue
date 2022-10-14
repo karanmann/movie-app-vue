@@ -34,14 +34,14 @@ header {
   justify-content: center;
   padding: 10px 16px;
   background-color: #2c3d4e;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1)
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
   color: white;
   font-size: 28px;
   span {
-    color: #42b883
+    color: #42b883;
   }
 }
 </style>
