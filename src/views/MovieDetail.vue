@@ -1,15 +1,11 @@
 <template>
-    <div>
-        
-    </div>
+  <div class="movie-detail">Detail {{ $route.params.id }}</div>
 </template>
 
 <script>
 export default {
     
-}
+};
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

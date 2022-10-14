@@ -5,7 +5,7 @@ import MovieDetail from '../views/MovieDetail.vue'
 const routes = [
   {
     path: '/',
-    name: 'Homee',
+    name: 'Home',
     component: HomeView
   },
   {
