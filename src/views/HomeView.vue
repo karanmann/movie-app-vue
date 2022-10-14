@@ -4,7 +4,7 @@
       <router-link to="/movie/tt0409591">
         <img
           class="feature-card__image"
-          src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages2.alphacoders.com%2F445%2Fthumb-1920-445151.jpg&f=1&nofb=1&ipt=405fc20b01a316e8bcca46c382277e3440996290035f75678118e77e2b81908e&ipo=images"
+          src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn5.vectorstock.com%2Fi%2F1000x1000%2F59%2F39%2Fnow-showing-movie-theater-banner-vector-3525939.jpg&f=1&nofb=1&ipt=f4b93a6bbf50d541a6418b8d5313d86a7cc4a5a5ddc7d7a8f7c8bc44abec56fb&ipo=images"
           alt="movie-collarge"
         />
         <div class="detail">
@@ -22,7 +22,20 @@
       <input type="text" placeholder="What are you looking for?" v-model="search"/>
       <input type="submit" value="Search" />
     </form>
-    <div class="movie-list">MOVIES GO HERE</div>
+    <div class="movies-list">
+      <div class="movie" v-for="movie in movies" :key="movie.imdbID">
+        <router-link v-bind:to="'/movie/' + movie.imdbID" class="movie-link">
+          <div class="product-image">
+            <img :src="movie.Poster" alt="movie oposter">
+            <div class="type">{{(movie.Type.toUpperCase())}}</div>
+            <div class="detail">
+              <p>{{movie.Year}}</p>
+              <h2>{{movie.Title}}</h2>
+            </div>
+          </div>
+        </router-link>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -40,7 +53,10 @@ export default {
       if (search.value != "") {
         fetch(`http://www.omdbapi.com/?apikey=${process.env.VUE_APP_OMDB_OPEN_API_TOKEN}&s=${search.value}`)
         .then( res => res.json())
-        .then(data => movies.value = data.Search)
+        .then(data => {
+          movies.value = data.Search
+          search.value = ""
+        })
       }
     }
     return {
@@ -132,6 +148,65 @@ export default {
         transition: 0.4s;
         &:active {
           background-color: #3B8070;
+        }
+      }
+    }
+  }
+
+  .movies-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 8px;
+    justify-content: center;
+
+    .movie {
+      max-width: 30%;
+      height:100%;
+      flex: 1 1 60%;
+      padding: 16px 8px;
+
+      .movie-link {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        .product-image {
+          position: relative;
+          display:block;
+
+          img {
+            display: block;
+            width: 100%;
+            height: 275px;
+            object-fit: cover;
+          }
+
+          .type {
+            position: absolute;
+            padding: 8px 16px;
+            background-color: #42b883;
+            color: white;
+            bottom: 86px;
+            left: 0;
+          }
+        }
+
+        .detail {
+          background-color: #496583;
+          padding: 16px 8px;
+          flex: 1 1 100%;
+          border-radius: 0 0 0 8px;
+
+          p {
+            color: #aaa;
+            font-size: 14px;
+          }
+
+          h2 {
+            color: #fff;
+            font-weight: 600;
+            font-size: 18px;
+          }
         }
       }
     }
