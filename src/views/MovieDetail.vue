@@ -18,7 +18,7 @@ export default {
     
     onBeforeMount(() => {
       fetch(
-        `http://www.omdbapi.com/?apikey=${VUE_APP_OMDB_OPEN_API_TOKEN}&i=${route.params.id}&plot=full`
+        `http://www.omdbapi.com/?apikey=${process.env.VUE_APP_OMDB_OPEN_API_TOKEN}&i=${route.params.id}&plot=full`
       )
         .then((response) => response.json())
         .then((data) => {
