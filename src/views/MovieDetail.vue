@@ -15,7 +15,7 @@ export default {
   setup() {
     const movie = ref({});
     const route = useRoute();
-    console.log(movie);
+    
     onBeforeMount(() => {
       fetch(
         `http://www.omdbapi.com/?apikey=${process.env.VUE_APP_OMDB_OPEN_API_TOKEN}&i=${route.params.id}&plot=full`
@@ -23,7 +23,6 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           movie.value = data;
-          console.log(movie.value)
         });
     });
     return {
